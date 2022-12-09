@@ -241,6 +241,12 @@ defmodule ExTwitter do
   @impl Behaviour
   defdelegate show(id, options), to: ExTwitter.API.Tweets
 
+  @impl Behaviour
+  defdelegate show_v2(id), to: ExTwitter.API.Tweets
+
+  @impl Behaviour
+  defdelegate show_v2(id, options), to: ExTwitter.API.Tweets
+
   @doc """
   POST statuses/destroy/:id
 
@@ -515,6 +521,12 @@ defmodule ExTwitter do
   """
   @impl Behaviour
   defdelegate search_next_page(search_result), to: ExTwitter.API.Search
+
+  @impl Behaviour
+  defdelegate search_v2(query), to: ExTwitter.API.Search
+
+  @impl Behaviour
+  defdelegate search_v2(query, options), to: ExTwitter.API.Search
 
   # -------------- Streaming -------------
 

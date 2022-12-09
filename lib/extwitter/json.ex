@@ -20,6 +20,10 @@ defmodule ExTwitter.JSON do
     json_library().decode(json, keys: :atoms)
   end
 
+  def encode!(map) do
+    json_library().encode!(map)
+  end
+
   @doc """
   Get Elixir object for the specified key.
 

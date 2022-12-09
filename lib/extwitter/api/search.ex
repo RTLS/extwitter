@@ -25,6 +25,16 @@ defmodule ExTwitter.API.Search do
     end
   end
 
+  def search_v2(query) do
+    params = ExTwitter.Parser.parse_request_params([query: query])
+    request(:get, "2/tweets/search/recent", params)
+  end
+
+  def search_v2(query, options) do
+    params = ExTwitter.Parser.parse_request_params([query: query] ++ options)
+    request(:get, "2/tweets/search/recent", params)
+  end
+
   defp search_with_metadata(params) do
     json = request(:get, "1.1/search/tweets.json", params)
     statuses = ExTwitter.JSON.get(json, :statuses) |> Enum.map(&ExTwitter.Parser.parse_tweet/1)

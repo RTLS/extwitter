@@ -23,6 +23,8 @@ defmodule ExTwitter.Behaviour do
   @callback retweets(integer() | String.t(), Keyword.t()) :: [ExTwitter.Model.Tweet.t()]
   @callback show(integer() | String.t()) :: ExTwitter.Model.Tweet.t()
   @callback show(integer() | String.t(), Keyword.t()) :: ExTwitter.Model.Tweet.t()
+  @callback show_v2(integer() | String.t()) :: map()
+  @callback show_v2(integer() | String.t(), Keyword.t()) :: map()
   @callback destroy_status(integer()) :: ExTwitter.Model.Tweet.t()
   @callback destroy_status(integer(), Keyword.t()) :: ExTwitter.Model.Tweet.t()
   @callback update(String.t()) :: ExTwitter.Model.Tweet.t()
@@ -43,6 +45,8 @@ defmodule ExTwitter.Behaviour do
   @callback search(String.t(), Keyword.t()) ::
               [ExTwitter.Model.Tweet.t()] | ExTwitter.Model.SearchResponse.t()
   @callback search_next_page(String.t()) :: [map()]
+  @callback search_v2(String.t()) :: map()
+  @callback search_v2(String.t(), Keyword.t()) :: map()
   @callback stream_sample :: Enumerable.t()
   @callback stream_user :: Enumerable.t()
   @callback stream_user(Keyword.t()) :: Enumerable.t()

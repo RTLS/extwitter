@@ -124,15 +124,21 @@ defmodule ExTwitter.API.Base do
   end
 
   defp parse_error(error, header) do
-    %{:code => code, :message => message} = error
-    case code do
-      @error_code_rate_limit_exceeded ->
+    case error do
+      %{code: @error_code_rate_limit_exceeded, message: message} ->
         reset_at = fetch_rate_limit_reset(header)
         reset_in = Enum.max([reset_at - now(), 0])
         raise ExTwitter.RateLimitExceededError,
-          code: code, message: message, reset_at: reset_at, reset_in: reset_in
-      _  ->
+          code: @error_code_rate_limit_exceeded, message: message, reset_at: reset_at, reset_in: reset_in
+
+      %{code: code, message: message}  ->
         raise ExTwitter.Error, code: code, message: message
+
+      %{message: message} ->
+        raise ExTwitter.Error, message: message
+
+      %{detail: detail} ->
+        raise ExTwitter.Error, message: "#{inspect(detail)}"
     end
   end
 

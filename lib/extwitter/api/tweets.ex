@@ -17,6 +17,14 @@ defmodule ExTwitter.API.Tweets do
     |> ExTwitter.Parser.parse_tweet
   end
 
+  def show_v2(id) do
+    request(:get, "2/tweets/#{id}")
+  end
+
+  def show_v2(id, options) do
+    request(:get, "2/tweets/#{id}", ExTwitter.Parser.parse_request_params(options))
+  end
+
   def update(status, options \\ []) do
     params = ExTwitter.Parser.parse_request_params([status: status] ++ options)
     request(:post, "1.1/statuses/update.json", params)
